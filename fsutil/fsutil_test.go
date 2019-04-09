@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/codeclysm/fs"
@@ -84,5 +85,11 @@ func check(t *testing.T, err error) {
 func equal(t *testing.T, got, expected interface{}) {
 	if !reflect.DeepEqual(got, expected) {
 		t.Fatalf("expected `%v`, got `%v`", expected, got)
+	}
+}
+
+func contains(t *testing.T, str, substr string) {
+	if !strings.Contains(str, substr) {
+		t.Fatalf("expected `%s` to contain `%s`", str, substr)
 	}
 }

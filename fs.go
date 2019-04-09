@@ -27,4 +27,6 @@ type FS interface {
 	Rename(oldpath, newpath string) error
 	Symlink(oldname, newname string) error
 	Truncate(name string, size int64) error
+	// Abs returns an absolute representation of path
+	Abs(path string) (string, error)
 }

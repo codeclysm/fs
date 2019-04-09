@@ -8,6 +8,10 @@ import (
 // OS is a wrapper around os package. Doesn't do anything fancy
 type OS struct{}
 
+func (o OS) Abs(name string) (string, error) {
+	return name, nil
+}
+
 func (o OS) Chmod(name string, mode os.FileMode) error {
 	return os.Chmod(name, mode)
 }

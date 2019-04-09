@@ -12,78 +12,99 @@ type Chroot struct {
 	Base string
 }
 
-func (c Chroot) join(path string) string {
-	return filepath.Join(c.Base, path)
+func (c Chroot) Abs(name string) (string, error) {
+	return filepath.Join(c.Base, name), nil
 }
 
 func (c Chroot) Chmod(name string, mode os.FileMode) error {
-	return c.FS.Chmod(c.join(name), mode)
+	name, _ = c.Abs(name)
+	return c.FS.Chmod(name, mode)
 }
 
 func (c Chroot) Chown(name string, uid, gid int) error {
-	return c.FS.Chown(c.join(name), uid, gid)
+	name, _ = c.Abs(name)
+	return c.FS.Chown(name, uid, gid)
 }
 
 func (c Chroot) Chtimes(name string, atime time.Time, mtime time.Time) error {
-	return c.FS.Chtimes(c.join(name), atime, mtime)
+	name, _ = c.Abs(name)
+	return c.FS.Chtimes(name, atime, mtime)
 }
 
 func (c Chroot) Create(name string) (*os.File, error) {
-	return c.FS.Create(c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.Create(name)
 }
 
 func (c Chroot) Lchown(name string, uid, gid int) error {
-	return c.FS.Lchown(c.join(name), uid, gid)
+	name, _ = c.Abs(name)
+	return c.FS.Lchown(name, uid, gid)
 }
 
 func (c Chroot) Link(oldname, newname string) error {
-	return c.FS.Link(c.join(oldname), c.join(newname))
+	oldname, _ = c.Abs(oldname)
+	newname, _ = c.Abs(newname)
+	return c.FS.Link(oldname, newname)
 }
 
 func (c Chroot) Lstat(name string) (os.FileInfo, error) {
-	return c.FS.Lstat(c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.Lstat(name)
 }
 
 func (c Chroot) Mkdir(name string, perm os.FileMode) error {
-	return c.FS.Mkdir(c.join(name), perm)
+	name, _ = c.Abs(name)
+	return c.FS.Mkdir(name, perm)
 }
 
 func (c Chroot) MkdirAll(path string, perm os.FileMode) error {
-	return c.FS.MkdirAll(c.join(path), perm)
+	path, _ = c.Abs(path)
+	return c.FS.MkdirAll(path, perm)
 }
 
 func (c Chroot) NewFile(fd uintptr, name string) *os.File {
-	return c.FS.NewFile(fd, c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.NewFile(fd, name)
 }
 
 func (c Chroot) Open(name string) (*os.File, error) {
-	return c.FS.Open(c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.Open(name)
 }
 
 func (c Chroot) OpenFile(name string, flag int, perm os.FileMode) (*os.File, error) {
-	return c.FS.OpenFile(c.join(name), flag, perm)
+	name, _ = c.Abs(name)
+	return c.FS.OpenFile(name, flag, perm)
 }
 
 func (c Chroot) Readlink(name string) (string, error) {
-	return c.FS.Readlink(c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.Readlink(name)
 }
 
 func (c Chroot) Remove(name string) error {
-	return c.FS.Remove(c.join(name))
+	name, _ = c.Abs(name)
+	return c.FS.Remove(name)
 }
 
 func (c Chroot) RemoveAll(path string) error {
-	return c.FS.RemoveAll(c.join(path))
+	path, _ = c.Abs(path)
+	return c.FS.RemoveAll(path)
 }
 
 func (c Chroot) Rename(oldpath, newpath string) error {
-	return c.FS.Rename(c.join(oldpath), c.join(newpath))
+	oldpath, _ = c.Abs(oldpath)
+	newpath, _ = c.Abs(newpath)
+	return c.FS.Rename(oldpath, newpath)
 }
 
 func (c Chroot) Symlink(oldname, newname string) error {
-	return c.FS.Symlink(c.join(oldname), c.join(newname))
+	oldname, _ = c.Abs(oldname)
+	newname, _ = c.Abs(newname)
+	return c.FS.Symlink(oldname, newname)
 }
 
 func (c Chroot) Truncate(name string, size int64) error {
-	return c.FS.Truncate(c.join(name), size)
+	name, _ = c.Abs(name)
+	return c.FS.Truncate(name, size)
 }
