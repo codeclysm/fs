@@ -1,10 +1,11 @@
-package fs_test
+package fsutil_test
 
 import (
 	"io/ioutil"
 	"testing"
 
 	"github.com/codeclysm/fs"
+	"github.com/codeclysm/fs/fsutil"
 )
 
 func TestLock(t *testing.T) {
@@ -14,7 +15,7 @@ func TestLock(t *testing.T) {
 		Base: tmp,
 	}
 
-	io := fs.NewLock(chroot)
+	io := fsutil.NewLock(chroot)
 
 	err := io.WriteFile("/file", []byte("hello"), 0644)
 	check(t, err)

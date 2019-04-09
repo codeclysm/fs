@@ -1,4 +1,4 @@
-package fs
+package fsutil
 
 import (
 	"bytes"
@@ -6,10 +6,12 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+
+	"github.com/codeclysm/fs"
 )
 
-type Ioutil interface {
-	FS
+type Util interface {
+	fs.FS
 	ReadDir(dirname string) ([]os.FileInfo, error)
 	ReadFile(filename string) ([]byte, error)
 	WriteFile(filename string, data []byte, perm os.FileMode) error
@@ -17,7 +19,11 @@ type Ioutil interface {
 }
 
 type Base struct {
-	FS
+	fs.FS
+}
+
+func NewBase(fs fs.FS) Base {
+	return Base{FS: fs}
 }
 
 func (b Base) ReadDir(dirname string) ([]os.FileInfo, error) {

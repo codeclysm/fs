@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// FS is the main interface that abstracts the os package functions that operate on files
 type FS interface {
 	Chmod(name string, mode os.FileMode) error
 	Chown(name string, uid, gid int) error

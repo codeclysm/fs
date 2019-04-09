@@ -56,6 +56,10 @@ func (s Spread) Link(oldname, newname string) error {
 	return s.FS.Link(s.spread(oldname), s.spread(newname))
 }
 
+func (s Spread) Lstat(name string) (os.FileInfo, error) {
+	return s.FS.Lstat(s.spread(name))
+}
+
 func (s Spread) Mkdir(name string, perm os.FileMode) error {
 	return s.FS.Mkdir(s.spread(name), perm)
 }

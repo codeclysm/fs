@@ -1,19 +1,21 @@
-package fs
+package fsutil
 
 import (
 	"fmt"
 	"os"
+
+	"github.com/codeclysm/fs"
 )
 
 // Lock wraps ioutil to provide locked read and write
 type Lock struct {
-	Ioutil
+	Util
 }
 
-func NewLock(fs FS) Lock {
+func NewLock(fs fs.FS) Lock {
 	io := Base{FS: fs}
 
-	return Lock{Ioutil: io}
+	return Lock{Util: io}
 }
 
 func (l Lock) ReadFile(filename string) ([]byte, error) {
@@ -24,8 +26,8 @@ func (l Lock) ReadFile(filename string) ([]byte, error) {
 
 	fmt.Println(stat)
 
-	return l.Ioutil.ReadFile(filename)
+	return l.Util.ReadFile(filename)
 }
 func (l Lock) WriteFile(filename string, data []byte, perm os.FileMode) error {
-	return l.Ioutil.WriteFile(filename, data, perm)
+	return l.Util.WriteFile(filename, data, perm)
 }
