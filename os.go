@@ -32,6 +32,10 @@ func (o OS) Link(oldname, newname string) error {
 	return os.Link(oldname, newname)
 }
 
+func (o OS) Lstat(name string) (os.FileInfo, error) {
+	return os.Lstat(name)
+}
+
 func (o OS) Mkdir(name string, perm os.FileMode) error {
 	return os.Mkdir(name, perm)
 }

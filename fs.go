@@ -14,6 +14,7 @@ type FS interface {
 	Create(name string) (*os.File, error)
 	Lchown(name string, uid, gid int) error
 	Link(oldname, newname string) error
+	Lstat(name string) (os.FileInfo, error)
 	Mkdir(name string, perm os.FileMode) error
 	MkdirAll(path string, perm os.FileMode) error
 	NewFile(fd uintptr, name string) *os.File

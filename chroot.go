@@ -40,6 +40,10 @@ func (c Chroot) Link(oldname, newname string) error {
 	return c.FS.Link(c.join(oldname), c.join(newname))
 }
 
+func (c Chroot) Lstat(name string) (os.FileInfo, error) {
+	return c.FS.Lstat(c.join(name))
+}
+
 func (c Chroot) Mkdir(name string, perm os.FileMode) error {
 	return c.FS.Mkdir(c.join(name), perm)
 }
