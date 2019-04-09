@@ -1,3 +1,4 @@
+// Package fsutil builds on the underlying fs to add useful functions such as WriteFile or Walk
 package fsutil
 
 import (
