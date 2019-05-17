@@ -28,14 +28,14 @@ func (s Spread) Abs(path string) (string, error) {
 
 func (s Spread) abs(path string) (string, error) {
 	if len(path) < 4 {
-		return "", errors.New("cannot spread a path shorter than 4 characters")
+		return "", errors.New("cannot spread a path shorter than 4 characters: " + path)
 	}
 	spreaded := strings.Replace(path, string(filepath.Separator), "", -1)
 
 	// Ensure the spread directories exists
 	err := s.FS.MkdirAll(filepath.Join(spreaded[0:2], spreaded[2:4]), 0755)
 	if err != nil {
-		return "", errors.New("cannot create spread directories")
+		return "", errors.New("cannot create spread directories: " + path)
 	}
 
 	return filepath.Join(spreaded[0:2], spreaded[2:4], path), nil
