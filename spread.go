@@ -2,6 +2,7 @@ package fs
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -35,7 +36,7 @@ func (s Spread) abs(path string) (string, error) {
 	// Ensure the spread directories exists
 	err := s.FS.MkdirAll(filepath.Join(spreaded[0:2], spreaded[2:4]), 0755)
 	if err != nil {
-		return "", errors.New("cannot create spread directories: " + path)
+		return "", fmt.Errorf("cannot create spread directories on %s: %w", path, err)
 	}
 
 	return filepath.Join(spreaded[0:2], spreaded[2:4], path), nil
