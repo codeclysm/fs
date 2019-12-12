@@ -1,4 +1,4 @@
-module github.com/codeclysm/fs
+module github.com/codeclysm/fs/v2
 
 go 1.13
 
